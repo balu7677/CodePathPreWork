@@ -1,0 +1,45 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> prettyPrint(int A) {
+       ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+       if (A==0)
+        return list;
+       int max = 2*A - 1;
+        int p =0;
+        for(int i=0;i<max;i++){
+        		Integer[] arr = new Integer[max];
+            int mid=max/2;
+            int k=mid;
+            while(k>=(mid-((max - p)/2))){
+            		arr[k]=A;
+                k--;
+            }
+            int x=0;
+            while(k>=0 && x<k+1) {
+            		arr[x] = list.get(i-1).get(x);
+            		x++;
+            }
+            k=mid;
+            while(k<=(mid+((max - p)/2))){
+            		arr[k] = A;
+                k++;
+            }
+            int y=k;
+            while(k<max && y<max) {
+            		arr[y] = list.get(i-1).get(y);
+        			y++;
+        			
+            }
+            if(i<max/2){
+                A--;
+                p+=2;
+            }
+            else{ 
+                A++;
+                p-=2;
+            }
+          
+          list.add(new ArrayList<Integer>(Arrays.asList(arr)));
+        }
+        return list;
+    }
+}
